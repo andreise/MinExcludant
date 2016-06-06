@@ -114,6 +114,8 @@ namespace MinExcludant
 
             string s = Console.ReadLine();
             string[] items = SplitLine(s, 2);
+            if (items.Length < 2)
+                throw new ArgumentException("Two items per line was expected.");
 
             if (!(items[0] == addOperation || items[0] == removeOperation))
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Operation code must be equals to '{0}' or '{1}'.", addOperation, removeOperation));
