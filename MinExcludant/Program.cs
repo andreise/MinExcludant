@@ -83,7 +83,7 @@ namespace MinExcludant
             return int.Parse(s, NumberStyles.Integer & ~NumberStyles.AllowLeadingSign, NumberFormatInfo.InvariantInfo);
         }
 
-        static int ReadInt32()
+        static int ReadNonnegativeInt32()
         {
             return ParseNonnegativeInt32(Console.ReadLine());
         }
@@ -91,7 +91,7 @@ namespace MinExcludant
         static int ReadIterations()
         {
             const int maxIterations = 150000;
-            int iterations = ReadInt32();
+            int iterations = ReadNonnegativeInt32();
             if (iterations > maxIterations)
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Iteration count must be less than or equals to {0}.", maxIterations));
             return iterations;
@@ -136,6 +136,7 @@ namespace MinExcludant
                 mexSequence.Add(mexComputer.CurrentMinimumExcludant);
             }
             Console.WriteLine(string.Join("\u0020", mexSequence.ToArray()));
+            //Console.WriteLine();
         }
 
     }
