@@ -44,6 +44,9 @@ namespace MinExcludant
 
         public void Push(int value)
         {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException("value", value, "Value must be equals to or greater than zero.");
+
             if (this.valueSet.ContainsKey(value))
             {
                 if (this.allowValueDuplicatesMode)
