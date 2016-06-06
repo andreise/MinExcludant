@@ -17,11 +17,16 @@ namespace MinExcludant
 
         private readonly Dictionary<int, int> valueSet;
 
-        private long currentMinimumExcludant;
+        private int currentMinimumExcludant;
 
-        public long CurrentMinimumExcludant
+        public int CurrentMinimumExcludant
         {
             get { return this.currentMinimumExcludant; }
+        }
+
+        public long LongCurrentMinimumExcludant
+        {
+            get { return this.currentMinimumExcludant == -1 ? (long)int.MaxValue + 1 : this.currentMinimumExcludant; }
         }
 
         public MininumExcludantComputer(bool allowValueDuplicatesMode, int capacity)
@@ -53,8 +58,8 @@ namespace MinExcludant
 
             do
             {
-                this.currentMinimumExcludant++;
-            } while (this.currentMinimumExcludant <= int.MaxValue && this.valueSet.ContainsKey((int)this.currentMinimumExcludant));
+                unchecked { this.currentMinimumExcludant++; }
+            } while (this.valueSet.ContainsKey(this.currentMinimumExcludant));
         }
 
         public void Pop(int value)
@@ -127,7 +132,7 @@ namespace MinExcludant
         {
             int iterations = ReadIterations();
             MininumExcludantComputer mexComputer = new MininumExcludantComputer(true, iterations);
-            List<long> mexSequence = new List<long>(iterations);
+            List<int> mexSequence = new List<int>(iterations);
             for (int i = 0; i < iterations; i++)
             {
                 Tuple<bool, int> operation = ReadOperation();
@@ -138,7 +143,7 @@ namespace MinExcludant
                 mexSequence.Add(mexComputer.CurrentMinimumExcludant);
             }
             Console.WriteLine(string.Join("\u0020", mexSequence.ToArray()));
-            //Console.WriteLine();
+            //Console.ReadLine();
         }
 
     }
