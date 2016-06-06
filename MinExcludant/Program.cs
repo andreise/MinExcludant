@@ -1,7 +1,4 @@
-﻿//#define CHECK_CONTRACTS
-//#define CHECK_DUPLICATESMODE
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -47,16 +44,12 @@ namespace MinExcludant
 
         public void Push(int value)
         {
-#if CHECK_CONTRACTS
             if (value < 0)
                 throw new ArgumentOutOfRangeException("value", value, "Value must be equals to or greater than zero.");
-#endif
 
             if (this.valueSet.ContainsKey(value))
             {
-#if CHECK_DUPLICATESMODE
                 if (this.allowValueDuplicatesMode)
-#endif
                     this.valueSet[value]++;
                 return;
             }
