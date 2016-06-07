@@ -77,7 +77,7 @@ namespace MinExcludant
             }
 
             this.valueSet.Remove(value);
-            if (value < this.currentMinimumExcludant)
+            if (unchecked((uint)value) < unchecked((uint)this.currentMinimumExcludant))
                 this.currentMinimumExcludant = value;
         }
 
