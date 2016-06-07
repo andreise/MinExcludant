@@ -153,7 +153,7 @@ namespace MinExcludant
                 mexSequenceBuilder.Length--;
 
             Console.WriteLine(mexSequenceBuilder.ToString());
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
     }
