@@ -26,7 +26,7 @@ namespace MinExcludant
 
         public long LongCurrentMinimumExcludant
         {
-            get { return this.currentMinimumExcludant == -1 ? (long)int.MaxValue + 1 : this.currentMinimumExcludant; }
+            get { return unchecked((uint)this.currentMinimumExcludant); }
         }
 
         public MininumExcludantComputer(bool allowValueDuplicatesMode, int capacity)
