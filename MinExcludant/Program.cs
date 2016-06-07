@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 
 namespace MinExcludant
 {
@@ -135,7 +136,9 @@ namespace MinExcludant
         {
             int iterations = ReadIterations();
             MininumExcludantComputer mexComputer = new MininumExcludantComputer(true, iterations);
-            List<int> mexSequence = new List<int>(iterations);
+
+            StringBuilder mexSequenceBuilder = new StringBuilder(iterations * 2);
+
             for (int i = 0; i < iterations; i++)
             {
                 Tuple<bool, int> operation = ReadOperation();
@@ -143,10 +146,14 @@ namespace MinExcludant
                     mexComputer.Push(operation.Item2);
                 else
                     mexComputer.Pop(operation.Item2);
-                mexSequence.Add(mexComputer.CurrentMinimumExcludant);
+                mexSequenceBuilder.Append(mexComputer.CurrentMinimumExcludant.ToString(NumberFormatInfo.InvariantInfo));
+                mexSequenceBuilder.Append('\u0020');
             }
-            Console.WriteLine(string.Join("\u0020", mexSequence.ToArray()));
-            //Console.ReadLine();
+            if (mexSequenceBuilder.Length > 0)
+                mexSequenceBuilder.Length--;
+
+            Console.WriteLine(mexSequenceBuilder.ToString());
+            Console.ReadLine();
         }
 
     }
