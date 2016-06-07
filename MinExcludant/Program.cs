@@ -106,14 +106,9 @@ namespace MinExcludant
             return iterations;
         }
 
-        static string[] SplitLine(string s, int maxCount)
+        static string[] SplitLine(string s)
         {
-            string[] tempItems = s.Split(new char[] { '\u0020', '\u0009' }, StringSplitOptions.RemoveEmptyEntries);
-            List<string> items = new List<string>(Math.Min(tempItems.Length, maxCount));
-            for (int i = 0; i < tempItems.Length && i < maxCount; i++)
-                if (!string.IsNullOrWhiteSpace(tempItems[i]))
-                    items.Add(tempItems[i]);
-            return items.ToArray();
+            return s.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
         }
 
         static Tuple<bool, int> ReadOperation()
@@ -122,7 +117,7 @@ namespace MinExcludant
             const string removeOperation = "-";
 
             string s = Console.ReadLine();
-            string[] items = SplitLine(s, 2);
+            string[] items = SplitLine(s);
             if (items.Length < 2)
                 throw new ArgumentException("Two items per line was expected.");
 
